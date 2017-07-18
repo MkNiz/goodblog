@@ -9,3 +9,14 @@ class Topic(models.Model):
     def __str__(self):
         """How to represent an instance as a string"""
         return self.text
+
+class Post(models.Model):
+    """A post in the blog"""
+    topic = models.ForeignKey(Topic)
+    title = models.CharField(max_length=128)
+    text = models.TextField()
+    date_added = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        """How to represent an instance as a string"""
+        return self.title
