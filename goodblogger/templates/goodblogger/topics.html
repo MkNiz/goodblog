@@ -2,6 +2,9 @@
 
 {% block content %}
 <h2>Topics</h2>
+<p>
+  <a href="{% url 'blog:new_topic' %}">Add New Topic</a>
+</p>
 <ul>
   {% for topic in topics %}
     <li>

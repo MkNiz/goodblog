@@ -7,7 +7,10 @@ urlpatterns = [
     # Home
     url(r'^$', views.index, name='index'),
 
-    # Topics
+    # All Topics
     url(r'^topics/$', views.topics, name='topics'),
-    url(r'^topics/(?P<topic_id>\d+)/$', views.topic, name='topic')
+    # Topic
+    url(r'^topics/(?P<topic_id>\d+)/$', views.topic, name='topic'),
+    # New Topic
+    url(r'^new_topic/$', views.new_topic, name='new_topic')
 ]
