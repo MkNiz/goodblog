@@ -1,0 +1,15 @@
+{% extends 'goodblogger/base.html' %}
+
+{% block content %}
+  <h2>Topic: {{ topic }}</h2>
+  <h3>Posts:</h3>
+  <ul>
+    {% for post in posts %}
+      <li>
+        <p>{{ post.date_added|date:'M d, Y H:i' }}</p>
+        <p>{{ post.title }}</p>
+      </li>
+    {% empty %}
+    {% endfor %}
+  </ul>
+{% endblock content %}
