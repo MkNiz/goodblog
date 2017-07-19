@@ -14,5 +14,5 @@ class PostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ['title', 'text']
-        labels = { 'title': 'Title: ', 'text': 'Content: ' }
+        labels = { 'title': 'Title', 'text': 'Content' }
         widgets = { 'text': forms.Textarea(attrs={ 'cols': 80 }) }

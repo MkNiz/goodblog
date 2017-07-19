@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 
 from .models import Topic
-from .forms import TopicForm
+from .forms import TopicForm, PostForm
 
 # Create your views here.
 def index(request):
@@ -33,3 +33,21 @@ def new_topic(request):
             form.save()
             return HttpResponseRedirect(reverse('blog:topics'))
     return render(request, 'goodblogger/new_topic.html', {'form': form})
+
+def new_post(request, topic_id):
+    """Add a new post"""
+    topic = Topic.objects.get(id=topic_id)
+
+    if request.method != 'POST':
+        # Display the blank form if data is not POSTed
+        form = PostForm()
+    else:
+        # Utilize POST data
+        form = PostForm(data=request.POST)
+        if form.is_valid():
+            new_entry = form.save(commit=False)
+            new_entry.topic = topic
+            new_entry.save()
+            return HttpResponseRedirect(reverse('blog:topic', args=[topic_id]))
+    context = { 'topic': topic, 'form': form }
+    return render(request, 'goodblogger/new_post.html', context)

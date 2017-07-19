@@ -2,6 +2,7 @@
 
 {% block content %}
   <h2>Topic: {{ topic }}</h2>
+  <h3><a href="{% url 'blog:new_post' topic.id %}">New Post</a></h3>
   <h3>Posts:</h3>
   <ul>
     {% for post in posts %}

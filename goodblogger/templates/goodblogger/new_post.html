@@ -1,0 +1,12 @@
+{% extends 'goodblogger/base.html' %}
+
+{% block content %}
+  <h2>New Post</h2>
+  <h3>Topic: <a href="{% url 'blog:topic' topic.id %}">{{ topic }}</a></h3>
+
+  <form action="{% url 'blog:new_post' topic.id %}" method='post'>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button name="submit">Add Post</button>
+  </form>
+{% endblock content %}
