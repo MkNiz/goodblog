@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 
-from .models import Topic
+from .models import Topic, Post
 from .forms import TopicForm, PostForm
 
 # Create your views here.
@@ -51,3 +51,20 @@ def new_post(request, topic_id):
             return HttpResponseRedirect(reverse('blog:topic', args=[topic_id]))
     context = { 'topic': topic, 'form': form }
     return render(request, 'goodblogger/new_post.html', context)
+
+def edit_post(request, post_id):
+    """Edit an existing post"""
+    post = Post.objects.get(id=post_id)
+    topic = post.topic
+
+    if request.method != 'POST':
+        # Prepares the form with the instance's existing data
+        form = PostForm(instance=post)
+    else:
+        # Accept data and make changes
+        form = PostForm(instance=post, data=request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('blog:topic', args=[topic.id]))
+    context = { 'post': post, 'topic': topic, 'form': form }
+    return render(request, 'goodblogger/edit_post.html', context)
