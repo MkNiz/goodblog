@@ -16,6 +16,7 @@ def topics(request):
     topics = Topic.objects.order_by('date_added')
     return render(request, 'goodblogger/topics.html', {'topics': topics})
 
+@login_required
 def topic(request, topic_id):
     """Displays a single topic and its posts"""
     topic = Topic.objects.get(id=topic_id)
@@ -23,6 +24,7 @@ def topic(request, topic_id):
     context = {'topic': topic, 'posts': posts}
     return render(request, 'goodblogger/topic.html', context)
 
+@login_required
 def new_topic(request):
     """Add a new topic"""
     if request.method != 'POST':
@@ -36,6 +38,7 @@ def new_topic(request):
             return HttpResponseRedirect(reverse('blog:topics'))
     return render(request, 'goodblogger/new_topic.html', {'form': form})
 
+@login_required
 def new_post(request, topic_id):
     """Add a new post"""
     topic = Topic.objects.get(id=topic_id)
@@ -54,6 +57,7 @@ def new_post(request, topic_id):
     context = { 'topic': topic, 'form': form }
     return render(request, 'goodblogger/new_post.html', context)
 
+@login_required
 def edit_post(request, post_id):
     """Edit an existing post"""
     post = Post.objects.get(id=post_id)
