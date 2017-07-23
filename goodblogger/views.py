@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 
@@ -20,6 +20,9 @@ def topics(request):
 def topic(request, topic_id):
     """Displays a single topic and its posts"""
     topic = Topic.objects.get(id=topic_id)
+    # Raise a 404 if the user doesn't own this topic
+    if topic.owner != request.user:
+        raise Http404
     posts = topic.post_set.order_by('-date_added')
     context = {'topic': topic, 'posts': posts}
     return render(request, 'goodblogger/topic.html', context)
