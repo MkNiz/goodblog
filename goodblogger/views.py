@@ -12,8 +12,8 @@ def index(request):
 
 @login_required
 def topics(request):
-    """Show all topics"""
-    topics = Topic.objects.order_by('date_added')
+    """Show all of the user's topics"""
+    topics = Topic.objects.filter(owner=request.user).order_by('date_added')
     return render(request, 'goodblogger/topics.html', {'topics': topics})
 
 @login_required
