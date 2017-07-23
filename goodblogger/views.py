@@ -65,6 +65,8 @@ def edit_post(request, post_id):
     """Edit an existing post"""
     post = Post.objects.get(id=post_id)
     topic = post.topic
+    if topic.owner != request.user:
+        raise Http404
 
     if request.method != 'POST':
         # Prepares the form with the instance's existing data
