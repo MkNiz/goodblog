@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # Third Party Apps
+    'bootstrap3',
     # My Apps
     'goodblogger',
     'users'
@@ -124,3 +126,8 @@ STATIC_URL = '/static/'
 
 # Custom Settings
 LOGIN_URL = '/users/login/'
+
+# Settings for django-bootstrap3
+BOOTSTRAP3 = {
+'include_jquery': True,
+}
