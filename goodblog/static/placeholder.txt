@@ -1,0 +1,2 @@
+This ensures the folder it is contained in will be included in the project
+even when it's otherwise empty
