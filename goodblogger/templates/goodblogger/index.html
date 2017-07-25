@@ -1,5 +1,16 @@
 {% extends "goodblogger/base.html" %}
 
+{% block header %}
+  <div class='jumbotron'>
+    <h1>Just Post</h1>
+  </div>
+{% endblock header %}
 {% block content %}
-  <p>Can I take your order?</p>
+  <h2>
+    <a href="{% url 'users:register' %}">Register</a> now to start making really
+    bad posts on-line.
+  </h2>
+  <h3>
+    Only you can see your posts, because they are woefully unfit for public consumption.
+  </h3>
 {% endblock content %}
